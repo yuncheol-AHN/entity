@@ -21,13 +21,15 @@ public class User {
     @Id @GeneratedValue
     @Column(name = "user_id")
     private Long id;
-    private String socialId;
+    private String email;
 
     @OneToMany(mappedBy = "user")
-    private List<Bookmark> bookmarkList;
+    @Builder.Default
+    private List<Bookmark> bookmarkList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<SingleHistory> singleHistoryList;
+    @Builder.Default
+    private List<SingleHistory> singleHistoryList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quizroom_id")

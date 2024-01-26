@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Builder(toBuilder = true)
 @NoArgsConstructor
@@ -25,7 +25,7 @@ public class SingleHistory {
     private User user;
 
     private int trialCount;
-    private LocalDateTime createDate;
+    private LocalDate createDate;
     private boolean isCorrect;
     private String resultText;
 }

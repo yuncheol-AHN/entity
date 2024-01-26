@@ -61,7 +61,7 @@ class SubjectRepositoryTest {
 
         Word word = Word.builder()
                 .wordName("1월")
-                .subject(null)
+                .subject(nameA)
                 .videoUrl("1a")
                 .build();
 
@@ -77,16 +77,15 @@ class SubjectRepositoryTest {
 //                    .subject()
 //        }
         System.out.println("1:::" + word);
-        nameA.addWord(word);
 
-        word = word.toBuilder()
-                .subject(nameA)
-                .build();
-
-
+//        Word testWord = testWord.toBuilder()
+//                        .subject(nameA)
+//                        .build();
         // when
         System.out.println("nameA.getWordList() = " + nameA.getWordList().get(0).getWordName());
-        System.out.println("word.getSubject() = " + word.getSubject());
+        System.out.println("word.getSubject() = " + word.getSubject().getSubjectName());
         // then
+
+//        Assertions.assertThat(word.getSubject().getSubjectName()).isEqualTo("달력");
     }
 }

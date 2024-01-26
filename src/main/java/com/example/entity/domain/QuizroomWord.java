@@ -23,6 +23,12 @@ public class QuizroomWord {
     private Quizroom quizroom;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "word_id")
     private Word word;
+
+    @Builder
+    public QuizroomWord(Quizroom quizroom, Word word) {
+        this.quizroom = quizroom;
+        this.word = word;
+        quizroom.quizroomWordList.add(this);
+    }
 }
