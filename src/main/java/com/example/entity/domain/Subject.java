@@ -21,46 +21,15 @@ public class Subject {
     private Long id;
 
     @OneToMany(mappedBy = "subject")
-    private List<Word> wordList;
+    @Builder.Default
+    private List<Word> wordList = new ArrayList<>();
 
     private String subjectName;
 
     @Builder
     public Subject(String subjectName) {
+
         this.subjectName = subjectName;
     }
-
-    public void addWord(Word word) {
-        System.out.println("2:::" + word);
-        this.wordList.add(word);
-        word = word.toBuilder().subject(this).build();
-
-        /**
-         * wordList에서 word를 찾아서
-         * 그 값의 subjectName을 바꿔준다.
-         */
-
-//        for (Word w: wordList) {
-//
-//            w.get
-//        }
-//
-//        word.toBuilder()
-//                .subject(this)
-//                .build();
-    }
-
-    // -- business method --//
-    // update subject name
-//    public void updateSubjectName(String subjectName) {
-//
-//        subjectName();
-//
-//        for (Word word: wordList) {
-//            word.toBuilder()
-//                    .subject(this)
-//                    .build();
-//        }
-//    }
 
 }

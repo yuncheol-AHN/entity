@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Builder(toBuilder = true)
@@ -20,17 +21,19 @@ public class Quizroom {
     private Long id;
 
     @OneToMany(mappedBy = "quizroom")
-    private List<User> userList;
+    @Builder.Default
+    private List<User> userList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "quizroom")
-    List<QuizroomWord> quizroomWords;
+    @OneToMany(mappedBy = "quizroom", cascade = CascadeType.ALL)
+    @Builder.Default
+    List<QuizroomWord> quizroomWordList = new ArrayList<>();
 
-    @Column(name = "is_playing")
-    private boolean isPlaying;  // 게임 진행중 여부
+    @Builder.Default
+    private boolean isPlaying = false;  // 게임 진행중 여부
 
-    @Column(name = "participants_count")
-    private int participantsCount;  // 참가자 수
+//  private int participantsCount;  // 참가자 수
+//  유저 리스트에서 참가인원 수를 체크하는 방식으로 사용하면 될듯 하여, deprecated 함
 
-    @Column(name = "invite_code")
     private String inviteCode;  // 초대 코드
+
 }

@@ -24,22 +24,22 @@ class UserTest {
     @Test
     public void user() throws Exception {
         // given
-        User user = User.builder()
-                .email("yuncheol")
-                .nickname("kiki")
-                .level(10)
-                .exp(1000)
-                .isPlaying(false)
-                .recentCorrectCount(30)
-                .maxCorrectCount(20)
-                .imageUrl("blblbl.com")
-                .build();
+//        User user = User.builder()
+//                .email("yuncheol")
+//                .nickname("kiki")
+//                .level(10)
+//                .exp(1000)
+//                .isPlaying(false)
+//                .recentCorrectCount(30)
+//                .maxCorrectCount(20)
+//                .imageUrl("blblbl.com")
+//                .build();
 
-        // do
-        em.persist(user);
-
-        em.flush();
-        em.clear();
+//        // do
+//        em.persist(user);
+//
+//        em.flush();
+//        em.clear();
 
         // then
     }

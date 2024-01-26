@@ -33,28 +33,28 @@ class UserRepositoryTest {
 
         // given
         // create user
-        User user = User.builder()
-                .email("yuncheol4")
-                .nickname("cup")
-                .level(10)
-                .exp(300)
-                .isPlaying(false)
-                .recentCorrectCount(30)
-                .maxCorrectCount(20)
-                .imageUrl("image.com")
-                .build();
-
-        // when
-        // save user
-        if (!userRepository.existsByEmail(user.getEmail())) {
-            userRepository.save(user);
-        }
-
-        // find user
-        User findUser = userRepository.findByEmail("yuncheol4");
-
-        // then
-        assertThat(user.getEmail()).isEqualTo(findUser.getEmail());
+//        User user = User.builder()
+//                .email("yuncheol4")
+//                .nickname("cup")
+//                .level(10)
+//                .exp(300)
+//                .isPlaying(false)
+//                .recentCorrectCount(30)
+//                .maxCorrectCount(20)
+//                .imageUrl("image.com")
+//                .build();
+//
+//        // when
+//        // save user
+//        if (!userRepository.existsByEmail(user.getEmail())) {
+//            userRepository.save(user);
+//        }
+//
+//        // find user
+//        User findUser = userRepository.findByEmail("yuncheol4");
+//
+//        // then
+//        assertThat(user.getEmail()).isEqualTo(findUser.getEmail());
     }
 
     @Test

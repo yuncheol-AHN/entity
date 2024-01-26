@@ -25,7 +25,8 @@ public class Word {
 //    private List<Bookmark> bookmarkList = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "word")
-//    private List<QuizroomWord> quizroomWords = new ArrayList<>();
+//    @Builder.Default
+//    private List<QuizroomWord> quizroomWordList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -34,7 +35,10 @@ public class Word {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
+    @Column(name = "word_name")
     private String wordName;
+
+    @Column(name = "video_url")
     private String videoUrl;
 
     /**
@@ -48,14 +52,9 @@ public class Word {
         this.subject = subject;
         this.wordName = wordName;
         this.videoUrl = videoUrl;
+        subject.getWordList().add(this);
     }
 
-    // 단순 단어 생성
-    @Builder
-    public Word(String wordName, String videoUrl) {
-        this.wordName = wordName;
-        this.videoUrl = videoUrl;
-    }
 
     public void changeSubject(Subject newSubject) {
         // 현재 단어의 주제가 있으면, 지워주고
@@ -70,12 +69,5 @@ public class Word {
         this.subject = newSubject;
     }
 
-    @Builder
-    public Word(Category category, String wordName, Subject subject) {
-        this.category = category;
-        this.wordName = wordName;
-        this.subject = subject;
 
-        subject.getWordList().add(this);
-    }
 }
