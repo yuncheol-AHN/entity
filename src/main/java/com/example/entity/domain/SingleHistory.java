@@ -24,8 +24,9 @@ public class SingleHistory {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private int trialCount;
     private LocalDate createDate;
+
+    private int trialCount;
     private boolean isCorrect;
     private String resultText;
 }
