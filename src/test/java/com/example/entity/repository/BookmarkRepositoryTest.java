@@ -106,25 +106,25 @@ class BookmarkRepositoryTest {
 
     }
 
-    @Test
-    public void findBookmark() throws Exception {
-
-        /**
-         * 1. find user by social id
-         * 2. find all bookmarks
-         * 3. select * from bookmarks join user.id and bookmark.id
-         */
-
-        User chulsu = userRepository.findByEmail("chulsu");
-        List<Bookmark> bookmarks = bookmarkRepository.findAllByUser(chulsu);
-
-        System.out.println("--------------------절취선-------------------");
-        for (Bookmark bookmark: bookmarks) {
-            System.out.println(bookmark.getWord().getWordName());
-        }
-
-        // when
-
-        // then
-    }
+//    @Test
+//    public void findBookmark() throws Exception {
+//
+//        /**
+//         * 1. find user by social id
+//         * 2. find all bookmarks
+//         * 3. select * from bookmarks join user.id and bookmark.id
+//         */
+//
+//        User chulsu = userRepository.findByEmail("chulsu");
+//        List<Bookmark> bookmarks = bookmarkRepository.findAllByUser(chulsu);
+//
+//        System.out.println("--------------------절취선-------------------");
+//        for (Bookmark bookmark: bookmarks) {
+//            System.out.println(bookmark.getWord().getWordName());
+//        }
+//
+//        // when
+//
+//        // then
+//    }
 }

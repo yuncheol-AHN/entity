@@ -40,6 +40,7 @@ public class User {
     private String nickname;
     private int level;
     private int exp;
+    private OAuthProvider oAuthProvider;
 
     // provider
     // refresh token
@@ -48,4 +49,12 @@ public class User {
     private int recentCorrectCount;
     private int maxCorrectCount;
     private String imageUrl;
+
+    @Builder
+    public User(String email, String nickname, OAuthProvider oAuthProvider) {
+        this.email = email;
+        this.nickname = nickname;
+        this.oAuthProvider = oAuthProvider;
+    }
+
 }

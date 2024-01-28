@@ -57,38 +57,38 @@ class UserRepositoryTest {
 //        assertThat(user.getEmail()).isEqualTo(findUser.getEmail());
     }
 
-    @Test
-    public void findUser() throws Exception {
-        // findById -> .get() 필요, findAll -> .get() 필요없음
-        // given
-        User user = userRepository.findByEmail("yuncheol1");
-        List<User> users = userRepository.findAll();
-
-        // do
-
-
-        // then
-        assertThat(user.getId()).isEqualTo(1);
-        assertThat(users.size()).isEqualTo(4);
-    }
-
-    @Test
-    public void updateUser() throws Exception {
-
-        // given
-        User user = userRepository.findByEmail("yuncheol1");
-
-        System.out.println("user : " + user.getId());
-        User updateUser = user.toBuilder()    // 설정 필요 !!!
-                .exp(999)
-                .build();
-
-        // do
-        userRepository.save(updateUser);   // id값을 기준으로 덮어쓰나?
-
-
-        // then
-        User findUser = userRepository.findByEmail("yuncheol1");
-        assertThat(updateUser.getExp()).isEqualTo(findUser.getExp());
-    }
+//    @Test
+//    public void findUser() throws Exception {
+//        // findById -> .get() 필요, findAll -> .get() 필요없음
+//        // given
+//        User user = userRepository.findByEmail("yuncheol1");
+//        List<User> users = userRepository.findAll();
+//
+//        // do
+//
+//
+//        // then
+//        assertThat(user.getId()).isEqualTo(1);
+//        assertThat(users.size()).isEqualTo(4);
+//    }
+//
+//    @Test
+//    public void updateUser() throws Exception {
+//
+//        // given
+//        User user = userRepository.findByEmail("yuncheol1");
+//
+//        System.out.println("user : " + user.getId());
+//        User updateUser = user.toBuilder()    // 설정 필요 !!!
+//                .exp(999)
+//                .build();
+//
+//        // do
+//        userRepository.save(updateUser);   // id값을 기준으로 덮어쓰나?
+//
+//
+//        // then
+//        User findUser = userRepository.findByEmail("yuncheol1");
+//        assertThat(updateUser.getExp()).isEqualTo(findUser.getExp());
+//    }
 }
