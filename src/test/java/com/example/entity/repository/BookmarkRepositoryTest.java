@@ -1,9 +1,7 @@
 package com.example.entity.repository;
 
-import com.example.entity.domain.Bookmark;
-import com.example.entity.domain.Category;
-import com.example.entity.domain.User;
-import com.example.entity.domain.Word;
+import com.example.entity.domain.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.apache.coyote.http11.Constants.a;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -20,8 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @Rollback(false)
 class BookmarkRepositoryTest {
 
-    @Autowired WordRepoitory wordRepoitory;
     @Autowired UserRepository userRepository;
+    @Autowired SubjectRepository subjectRepository;
+    @Autowired WordRepoitory wordRepoitory;
     @Autowired BookmarkRepository bookmarkRepository;
 
     /**
@@ -49,62 +50,60 @@ class BookmarkRepositoryTest {
          * 중복 저장되는 문제 ... 어디서 처리해줄까
          */
         // given
-        Word word1 = Word.builder()
-                .category(Category.CONSONANT)
-                .wordName("a")
-                .videoUrl("blabla")
+        User chulsu = User.builder()
+                .email("chulsu")
                 .build();
 
-        Word word2 = Word.builder()
-                .category(Category.CONSONANT)
-                .wordName("b")
-                .videoUrl("blabla")
+        User younghee = User.builder()
+                .email("younghee")
                 .build();
 
-        Word word3 = Word.builder()
-                .category(Category.CONSONANT)
-                .wordName("c")
-                .videoUrl("blabla")
+        userRepository.save(chulsu);
+        userRepository.save(younghee);
+
+        Subject fruit = Subject.builder()
+                .subjectName("fruit")
                 .build();
 
-        wordRepoitory.save(word1);
-        wordRepoitory.save(word2);
-        wordRepoitory.save(word3);
-
-        User user = User.builder()
-                .email("yuncheol2")
-                .nickname("jparepotest")
-                .level(10)
-                .exp(300)
-                .isPlaying(false)
-                .recentCorrectCount(30)
-                .maxCorrectCount(20)
-                .imageUrl("blblbl.com")
-                .bookmarkList(new ArrayList<>())
+        Word apple = Word.builder()
+                .category(Category.WORD)
+                .subject(fruit)
+                .wordName("apple")
                 .build();
 
-        Bookmark bookmark1 = Bookmark.builder()
-                .word(word1)
-                .user(user)
+        Word banana = Word.builder()
+                .category(Category.WORD)
+                .subject(fruit)
+                .wordName("banana")
                 .build();
-        Bookmark bookmark2 = Bookmark.builder()
-                .word(word2)
-                .user(user)
-                .build();
-        Bookmark bookmark3 = Bookmark.builder()
-                .word(word3)
-                .user(user)
-                .build();
-//        user.getBookmarkList().add(bookmark1);
 
+        subjectRepository.save(fruit);
+        wordRepoitory.save(apple);
+        wordRepoitory.save(banana);
 
-        userRepository.save(user);
-        bookmarkRepository.save(bookmark1);
-        bookmarkRepository.save(bookmark2);
-        bookmarkRepository.save(bookmark3);
-        // when
-        
+        Bookmark bookmark_apple = Bookmark.builder()
+                .user(chulsu)
+                .word(apple)
+                .build();
+
+        Bookmark bookmark_banana = Bookmark.builder()
+                .user(younghee)
+                .word(banana)
+                .build();
+
+        Bookmark bookmark_chulsu_banana = Bookmark.builder()
+                .user(chulsu)
+                .word(banana)
+                .build();
+
+        bookmarkRepository.save(bookmark_apple);
+        bookmarkRepository.save(bookmark_banana);
+        bookmarkRepository.save(bookmark_chulsu_banana);
+
         // then
+//        assertThat(bookmark_apple).isEqualTo(bookmarkRepository.findByUserAndWord(chulsu, apple));
+//        assertThat(bookmark_banana).isEqualTo(bookmarkRepository.findByUserAndWord(younghee, banana));
+
     }
 
     @Test
@@ -115,12 +114,13 @@ class BookmarkRepositoryTest {
          * 2. find all bookmarks
          * 3. select * from bookmarks join user.id and bookmark.id
          */
-        // given
-        List<Bookmark> bookmarks = bookmarkRepository.findAll();
+
+        User chulsu = userRepository.findByEmail("chulsu");
+        List<Bookmark> bookmarks = bookmarkRepository.findAllByUser(chulsu);
 
         System.out.println("--------------------절취선-------------------");
         for (Bookmark bookmark: bookmarks) {
-            System.out.println(bookmark.getUser().getEmail());
+            System.out.println(bookmark.getWord().getWordName());
         }
 
         // when

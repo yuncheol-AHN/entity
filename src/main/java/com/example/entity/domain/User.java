@@ -21,6 +21,8 @@ public class User {
     @Id @GeneratedValue
     @Column(name = "user_id")
     private Long id;
+
+    // unique key
     private String email;
 
     @OneToMany(mappedBy = "user")

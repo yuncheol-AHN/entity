@@ -1,6 +1,8 @@
 package com.example.entity.repository;
 
 import com.example.entity.domain.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +15,6 @@ import java.util.List;
 @Transactional
 @Rollback(value = false)
 class QuizroomRepositoryTest {
-
     @Autowired UserRepository userRepository;
     @Autowired QuizroomWordRepository quizroomWordRepository;
     @Autowired QuizroomRepository quizroomRepository;
@@ -28,9 +29,13 @@ class QuizroomRepositoryTest {
                 .inviteCode("1234567")
                 .build();
         /**
-         *quizRoom 생성 -> word 테이블에서 word 랜덤으로 조회 - > quizRoom과 word로 구성된 quizRoomWord생성
-         * -> quizRoom에 quizRoomWord삽입 -> 나중에 quizRoom.quizRoomWord.word로 quizRoom에 있는 단어찾기
-          */
+         * quizRoom 생성
+         * -> word 테이블에서 word 랜덤으로 조회
+         * -> quizRoom과 word로 구성된 quizRoomWord생성
+         * -> quizRoom에 quizRoomWord삽입
+         * -> 나중에 quizRoom.quizRoomWord.word로 quizRoom에 있는 단어찾기
+         *
+         */
 
         Subject fruit = Subject.builder()
                 .subjectName("fruit").build();
@@ -66,6 +71,8 @@ class QuizroomRepositoryTest {
         for (QuizroomWord word : quizroomWordList) {
             System.out.println("word = " + word);
         }
+
+
 
     }
 

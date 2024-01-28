@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Getter
-public class friendRelationship {
+public class FriendRelationship {
 
     @Id @GeneratedValue
     private Long id;
